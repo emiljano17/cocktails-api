@@ -409,3 +409,29 @@ Cocktail
     height: 5em;
   }
 }
+
+/* Pagination */
+
+.custom__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom__pagination .custom__page__item {
+  text-decoration: none;
+  padding: 3px 6px;
+  margin: 0px 5px 10px;
+  border: 1px solid rgb(85, 85, 247);
+  border-radius: 2px;
+}
+
+.custom__pagination .custom__page__item .custom__page__link {
+  color: black;
+}
+
+.custom__pagination .custom__page__item .custom__page__link.active {
+  color: blue;
+  font-weight: bold;
+  background-color: #f3f3f3;
+}

@@ -8,6 +8,8 @@ const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("a");
   const [cocktails, setCocktails] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(6);
 
   const fetchDrinks = useCallback(async () => {
     setLoading(true);
@@ -45,13 +47,28 @@ const AppProvider = ({ children }) => {
     fetchDrinks();
   }, [searchTerm, fetchDrinks]);
 
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = cocktails.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
-    <AppContext.Provider value={{ loading, cocktails, setSearchTerm }}>
+    <AppContext.Provider
+      value={{
+        loading,
+        cocktails,
+        setSearchTerm,
+        postsPerPage,
+        paginate,
+        currentPosts,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
 };
-// make sure use
+
 export const useGlobalContext = () => {
   return useContext(AppContext);
 };
